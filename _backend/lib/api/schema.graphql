@@ -1,0 +1,101 @@
+type Query {
+	listAmplifyApps: [AmplifyApp] @aws_cognito_user_pools
+}
+
+type Mutation {
+	publishMsgFromEB(input: AmplifyEventInput!): AmplifyPublish @aws_iam
+}
+
+type Subscription {
+	onPublishMsgFromEb: AmplifyPublish
+		@aws_cognito_user_pools
+		@aws_subscribe(mutations: ["publishMsgFromEB"])
+}
+
+type AmplifyApp {
+	appId: String!
+	appArn: String!
+	name: String!
+	repository: String!
+	domain: String!
+	status: String!
+}
+
+input AmplifyEventInput {
+	appId: String!
+	appArn: String!
+	status: String!
+}
+
+type AmplifyPublish @aws_iam {
+	appId: String!
+	appArn: String!
+	status: String!
+}
+# Event Payload
+# {
+#     "version": "0",
+#     "id": "f5f22592-1ef9-83f7-6dff-d57ec89f6156",
+#     "detail-type": "Amplify Deployment Status Change",
+#     "source": "aws.amplify",
+#     "account": "842537737558",
+#     "time": "2024-02-02T06:53:05Z",
+#     "region": "us-east-1",
+#     "resources": [
+#         "arn:aws:amplify:us-east-1:842537737558:apps/d2ihil90go3azt/branches/main/jobs/0000000002"
+#     ],
+#     "detail": {
+#         "appId": "d2ihil90go3azt",
+#         "branchName": "main",
+#         "jobId": "2",
+#         "jobStatus": "SUCCEED"
+#         "jobStep" "DEPLOY" (NOT ALWAYS THERE)
+#     }
+# }
+
+# {
+#             "appId": "d2ihil90go3azt",
+#             "appArn": "arn:aws:amplify:us-east-1:842537737558:apps/d2ihil90go3azt",
+#             "name": "sample-deploy",
+#             "tags": {},
+#             "repository": "https://github.com/mtliendo/sample-deploy",
+#             "platform": "WEB",
+#             "createTime": "2024-02-02T00:40:47.506000-06:00",
+#             "updateTime": "2024-02-02T00:40:47.506000-06:00",
+#             "iamServiceRoleArn": "arn:aws:iam::842537737558:role/amplifyconsole-backend-role",
+#             "environmentVariables": {
+#                 "_LIVE_UPDATES": "[{\"name\":\"Amplify CLI\",\"pkg\":\"@aws-amplify/cli\",\"type\":\"np
+# m\",\"version\":\"latest\"}]"
+#             },
+#             "defaultDomain": "d2ihil90go3azt.amplifyapp.com",
+#             "enableBranchAutoBuild": false,
+#             "enableBranchAutoDeletion": false,
+#             "enableBasicAuth": false,
+#             "customRules": [
+#                 {
+#                     "source": "/<*>",
+#                     "target": "/index.html",
+#                     "status": "404-200"
+#                 }
+#             ],
+#             "productionBranch": {
+#                 "lastDeployTime": "2024-02-02T00:53:05.587000-06:00",
+#                 "status": "SUCCEED",
+#                 "branchName": "main"
+#             },
+#             "buildSpec": "version: 1\nbackend:\n  phases:\n    build:\n      commands:\n        - '# Execute Amplify CLI with the helper script'\n        - amplifyPush --simple\nfrontend:\n  phases:\n    preBuild:\n      commands:\n        - npm ci\n    build:\n      commands:\n        - npm run build\n  artifacts:\n    baseDirectory: dist\n    files:\n      - '**/*'\n  cache:\n    paths:\n      - node_modules/**/*\n",
+#             "customHeaders": "",
+#             "enableAutoBranchCreation": false,
+#             "repositoryCloneMethod": "TOKEN"
+#         }
+
+#  Sample Rule
+# {
+#   "detail": {
+#     "appId": ["d2ihil90go3azt"],
+#     "branchName": ["main"],
+#     "jobStatus": ["SUCCEED", "FAILED", "STARTED", "RUNNING"],
+#   },
+#   "detail-type": ["Amplify Deployment Status Change"],
+#   "source": ["aws.amplify"]
+# }

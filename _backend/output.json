@@ -1,0 +1,12 @@
+{
+  "AmplifyHealthcheckBackendStack": {
+    "EventBusName": "default",
+    "UserPoolClientId": "2vaps4tq04bhe7jkmhhcpltik2",
+    "appsyncapiarn": "arn:aws:appsync:us-east-1:842537737558:apis/vmbsqzpgezc3ph2euj5q7x6lgq",
+    "cfngraphqlarn": "arn:aws:appsync:us-east-1:842537737558:endpoints/graphql-api/rnxidqia55dodmnr74xto2lyie",
+    "UserPoolId": "us-east-1_v4pSqB3v9",
+    "GraphQLAPIURL": "https://rnxidqia55dodmnr74xto2lyie.appsync-api.us-east-1.amazonaws.com/graphql",
+    "Region": "us-east-1",
+    "IdentityPoolId": "us-east-1:4297da64-83c9-402e-9401-e694c77b03e3"
+  }
+}
