@@ -1,4 +1,5 @@
 # Amplify Healthcheck with AWS AppSync and Amazon EventBridge
+![image](https://github.com/focusOtter/amplify-hosting-health-checker/assets/5106417/595e6cd5-3a86-4604-a9d1-78cf3ba1e663)
 
 Amplify Healthcheck is an application designed to showcase the integration of AWS AppSync and Amazon EventBridge with a React (Vite) frontend for real-time monitoring and notifications of Amplify Hosting applications' build statuses. This monorepo includes both a React project for the frontend and an AWS Cloud Development Kit (CDK) backend, providing a comprehensive example of how to leverage these AWS services in a modern web application.
 
